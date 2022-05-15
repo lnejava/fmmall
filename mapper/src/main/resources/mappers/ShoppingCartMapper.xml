@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lne.fmmall.dao.ShoppingCartMapper">
+  <resultMap id="BaseResultMap" type="com.lne.fmmall.entity.ShoppingCart">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="cart_id" jdbcType="BIGINT" property="cartId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="sku_props" jdbcType="VARCHAR" property="skuProps" />
+    <result column="cart_num" jdbcType="VARCHAR" property="cartNum" />
+    <result column="cart_time" jdbcType="VARCHAR" property="cartTime" />
+    <result column="product_price" jdbcType="DECIMAL" property="productPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <resultMap id="shoppingCartVotMap" type="com.lne.fmmall.entity.ShoppingCartVo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="cart_id" jdbcType="BIGINT" property="cartId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="sku_props" jdbcType="VARCHAR" property="skuProps" />
+    <result column="cart_num" jdbcType="VARCHAR" property="cartNum" />
+    <result column="cart_time" jdbcType="VARCHAR" property="cartTime" />
+    <result column="product_price" jdbcType="DECIMAL" property="productPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="url" jdbcType="DECIMAL" property="productImg" />
+    <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+    <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
+    <result column="sku_name" jdbcType="DECIMAL" property="skuName" />
+  </resultMap>
+
+  <resultMap id="shoppingCartVotMap1" type="com.lne.fmmall.entity.ShoppingCartVo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="cart_id" jdbcType="BIGINT" property="cartId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="sku_props" jdbcType="VARCHAR" property="skuProps" />
+    <result column="cart_num" jdbcType="VARCHAR" property="cartNum" />
+    <result column="cart_time" jdbcType="VARCHAR" property="cartTime" />
+    <result column="product_price" jdbcType="DECIMAL" property="productPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="url" jdbcType="DECIMAL" property="productImg" />
+    <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+    <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
+    <result column="sku_name" jdbcType="DECIMAL" property="skuName" />
+    <result column="stock" jdbcType="DECIMAL" property="skuStock" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+  </resultMap>
+
+  <select id="selectShoppingCartById" resultMap="shoppingCartVotMap1">
+    select
+    t1.cart_id,t1.product_id,t1.sku_id,t1.cart_num,t1.cart_time,
+    t1.product_price,t1.sku_props,t2.product_name,t3.url,t4.original_price,
+    t4.sell_price,t4.sku_name,t4.stock
+    from shopping_cart t1
+    inner join product t2
+    inner join product_img t3
+    inner join product_sku t4
+    on t1.product_id=t2.product_id and t1.product_id=t3.item_id and t1.sku_id=t4.sku_id
+    where t3.is_main=1 and t1.cart_id in
+    <foreach collection="cartIds" item="cid" separator="," open="(" close =")">
+      #{cid}
+    </foreach>
+  </select>
+</mapper>

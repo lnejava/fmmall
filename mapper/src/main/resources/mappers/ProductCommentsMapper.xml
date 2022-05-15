@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lne.fmmall.dao.ProductCommentsMapper">
+  <resultMap id="BaseResultMap" type="com.lne.fmmall.entity.ProductComments">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="comm_id" jdbcType="BIGINT" property="commId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="order_item_id" jdbcType="BIGINT" property="orderItemId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="is_anonymous" jdbcType="TINYINT" property="isAnonymous" />
+    <result column="comm_type" jdbcType="TINYINT" property="commType" />
+    <result column="comm_level" jdbcType="TINYINT" property="commLevel" />
+    <result column="comm_imgs" jdbcType="VARCHAR" property="commImgs" />
+    <result column="spec_name" jdbcType="TIMESTAMP" property="specName" />
+    <result column="reply_status" jdbcType="TINYINT" property="replyStatus" />
+    <result column="reply_time" jdbcType="TIMESTAMP" property="replyTime" />
+    <result column="is_show" jdbcType="TINYINT" property="isShow" />
+    <result column="comm_content" jdbcType="LONGVARCHAR" property="commContent" />
+    <result column="reply_content" jdbcType="LONGVARCHAR" property="replyContent" />
+  </resultMap>
+
+  <resultMap id="productCommentsVoMap" type="com.lne.fmmall.entity.ProductCommentsVo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="comm_id" jdbcType="BIGINT" property="commId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="order_item_id" jdbcType="BIGINT" property="orderItemId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="is_anonymous" jdbcType="TINYINT" property="isAnonymous" />
+    <result column="comm_type" jdbcType="TINYINT" property="commType" />
+    <result column="comm_level" jdbcType="TINYINT" property="commLevel" />
+    <result column="comm_imgs" jdbcType="VARCHAR" property="commImgs" />
+    <result column="spec_name" jdbcType="TIMESTAMP" property="specName" />
+    <result column="reply_status" jdbcType="TINYINT" property="replyStatus" />
+    <result column="reply_time" jdbcType="TIMESTAMP" property="replyTime" />
+    <result column="is_show" jdbcType="TINYINT" property="isShow" />
+    <result column="comm_content" jdbcType="LONGVARCHAR" property="commContent" />
+    <result column="reply_content" jdbcType="LONGVARCHAR" property="replyContent" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+  </resultMap>
+
+  <select id="selectCommentsByProductId" resultMap="productCommentsVoMap">
+    select
+      t2.username,t2.nickname,t2.user_img,
+      t1.comm_id,
+      t1.product_id,
+      t1.product_name,
+      t1.order_item_id,
+      t1.user_id,
+      t1.is_anonymous,
+      t1.comm_type,
+      t1.comm_level,
+      t1.comm_content,
+      t1.comm_imgs,
+      t1.spec_name,
+      t1.reply_status,
+      t1.reply_content,
+      t1.reply_time,
+      t1.is_show
+    from product_comments t1
+    INNER join users t2
+    on t1.user_id = t2.user_id
+    where t1.product_id = #{productId}
+    limit #{start},#{limit};
+  </select>
+</mapper>

@@ -1,0 +1,37 @@
+server:
+  port: 8088
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.230.136:3306/fmmall_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      min-idle: 2
+      max-active: 20
+      max-wait: 2000
+      initial-size: 2
+  mail:
+    default-encoding: UTF-8
+    username: fengsu_lin@163.com
+    password: TZQTKTDKAXVCZQJH
+    host: smtp.163.com
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+  webflux:
+    multipart:
+      max-parts: 3
+      max-disk-usage-per-part: 1024
+mybatis:
+  type-aliases-package: com.lne.fmmall.entity
+  mapper-locations: classpath*:/mappers/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    org.mybatis: debug
+    dao: debug
