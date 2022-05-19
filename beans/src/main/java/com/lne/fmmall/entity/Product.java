@@ -51,8 +51,8 @@ public class Product {
     /**
      * 更新时间
      */
-    @Column(name = "upLocalDateTime_time")
-    private LocalDateTime upLocalDateTimeTime;
+    @Column(name = "update_time")
+    private LocalDateTime updateTime;
 
     /**
      * 商品内容
@@ -190,17 +190,17 @@ public class Product {
      *
      * @return upLocalDateTime_time - 更新时间
      */
-    public LocalDateTime getUpLocalDateTimeTime() {
-        return upLocalDateTimeTime;
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
     }
 
     /**
      * 设置更新时间
      *
-     * @param upLocalDateTimeTime 更新时间
+     * @param updateTime 更新时间
      */
-    public void setUpLocalDateTimeTime(LocalDateTime upLocalDateTimeTime) {
-        this.upLocalDateTimeTime = upLocalDateTimeTime;
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
 
     /**

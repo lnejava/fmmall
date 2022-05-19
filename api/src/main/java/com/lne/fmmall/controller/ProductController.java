@@ -1,5 +1,6 @@
 package com.lne.fmmall.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lne.fmmall.service.ProductService;
 import com.lne.fmmall.vo.ResultVo;
 import io.swagger.annotations.Api;
@@ -50,6 +51,13 @@ public class ProductController {
                                              @RequestParam("start") Integer start,
                                              @RequestParam("limit") Integer limit){
         return productService.listProductsByKeyword(kw,start,limit);
+    }
+
+    @GetMapping("/getProductInfo")
+    @ApiOperation("查询商品详情")
+    @ApiImplicitParam(dataType = "String",value = "商品id",name = "productId")
+    public ResultVo getProductBasicInfo(@RequestParam("productId") String productId) throws JsonProcessingException {
+        return productService.getProductBasicInfo(productId);
     }
 
 }

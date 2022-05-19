@@ -15,7 +15,7 @@ public class ProductSku {
     @Column(name = "sku_id")
     private Long skuId;
 
-    @Column(name = "product_ide")
+    @Column(name = "product_id")
     private Long productId;
 
     public Long getProductId() {

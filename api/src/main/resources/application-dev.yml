@@ -26,6 +26,11 @@ spring:
     multipart:
       max-parts: 3
       max-disk-usage-per-part: 1024
+  redis:
+    host: 192.168.230.136
+    port: 6379
+    database: 0
+    password: redis@123456
 mybatis:
   type-aliases-package: com.lne.fmmall.entity
   mapper-locations: classpath*:/mappers/*.xml

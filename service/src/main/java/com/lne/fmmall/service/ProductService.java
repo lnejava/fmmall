@@ -1,5 +1,6 @@
 package com.lne.fmmall.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lne.fmmall.vo.ResultVo;
 import io.swagger.models.auth.In;
 
@@ -17,4 +18,7 @@ public interface ProductService {
 
     /**关键字分页查询*/
     public ResultVo listProductsByKeyword(String kw,Integer start,Integer limit);
+
+    /**查询商品详情*/
+    public ResultVo getProductBasicInfo(String productId) throws JsonProcessingException;
 }
