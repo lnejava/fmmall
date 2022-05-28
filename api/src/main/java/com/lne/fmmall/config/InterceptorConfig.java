@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  */
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
-    @Autowired
+    @Resource
     private CheckTokenInterceptor checkTokenInterceptor;
     @Resource
     private KeepTokenAliveInterceptor keepTokenAliveInterceptor;
