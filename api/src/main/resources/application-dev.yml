@@ -1,6 +1,9 @@
 server:
   port: 8088
 spring:
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
@@ -40,3 +43,10 @@ logging:
   level:
     org.mybatis: debug
     dao: debug
+# 自定义redis连接
+redisson:
+  addr:
+    singleAddr:
+      host: redis://192.168.230.136:6379
+      password: redis@123456
+      database: 0
