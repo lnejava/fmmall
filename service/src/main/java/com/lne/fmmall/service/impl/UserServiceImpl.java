@@ -10,6 +10,7 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * FileName: UserServiceImpl
@@ -30,6 +32,8 @@ import java.util.List;
 @Slf4j
 public class UserServiceImpl implements UserService {
 
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
     @Resource
     private UsersMapper usersMapper;
 
@@ -122,6 +126,7 @@ public class UserServiceImpl implements UserService {
                 hashMap.put("token",token);
                 hashMap.put("items",users);
                 log.info("登录成功！");
+                stringRedisTemplate.boundValueOps(token).set(name,2, TimeUnit.MINUTES);
                 return new ResultVo()
                         .setSuccess(true)
                         .setCode(10000)
